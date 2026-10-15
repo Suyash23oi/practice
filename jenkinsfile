@@ -1,19 +1,37 @@
 pipeline {
     agent any
+    parameters{
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'prod'], description: 'Select the environment to deploy to')
+    }
     stages{
-        stage('Build') {
+        stage('build'){
+            bat echo 'Building...'
+        }
+        stage('test'){
+            bat echo 'Testing...'
+        }
+        stage('deploy to dev'){
+            when {
+                expression { params.ENVIRONMENT == 'dev' }
+            }
             steps {
-                echo 'Building...'
+                bat echo 'Deploying to development...'
             }
         }
-        stage('Test') {
+        stage('deploy to qa'){
+            when {
+                expression { params.ENVIRONMENT == 'qa' }
+            }
             steps {
-                echo 'Testing...'
+                bat echo 'Deploying to QA...'
             }
         }
-        stage('Deploy') {
+        stage('deploy to prod'){
+            when {
+                expression { params.ENVIRONMENT == 'prod' }
+            }
             steps {
-                echo 'Deploying...'
+                bat echo 'Deploying to production...'
             }
         }
     }
