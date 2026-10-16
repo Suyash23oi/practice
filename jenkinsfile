@@ -4,13 +4,16 @@ pipeline {
         choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'prod'], description: 'Select the environment to deploy to')
     }
     stages{
-        stage('build')
+        stage('build'){
 	steps {
             bat echo 'Building...'
-        }
+              }
+	}
         stage('test'){
+	steps {
             bat echo 'Testing...'
-        }
+              }
+	}
         stage('deploy to dev'){
             when {
                 expression { params.ENVIRONMENT == 'dev' }
@@ -37,5 +40,10 @@ pipeline {
         }
     }
 }
+
+
+
+
+
 
 
