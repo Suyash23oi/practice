@@ -6,12 +6,12 @@ pipeline {
     stages{
         stage('build'){
 	steps {
-            bat echo 'Building...'
+            echo 'Building...'
               }
 	}
         stage('test'){
 	steps {
-            bat echo 'Testing...'
+            echo 'Testing...'
               }
 	}
         stage('deploy to dev'){
@@ -19,7 +19,7 @@ pipeline {
                 expression { params.ENVIRONMENT == 'dev' }
             }
             steps {
-                bat echo 'Deploying to development...'
+                echo 'Deploying to development...'
             }
         }
         stage('deploy to qa'){
@@ -27,7 +27,7 @@ pipeline {
                 expression { params.ENVIRONMENT == 'qa' }
             }
             steps {
-                bat echo 'Deploying to QA...'
+                echo 'Deploying to QA...'
             }
         }
         stage('deploy to prod'){
@@ -35,7 +35,7 @@ pipeline {
                 expression { params.ENVIRONMENT == 'prod' }
             }
             steps {
-                bat echo 'Deploying to production...'
+                echo 'Deploying to production...'
             }
         }
     }
